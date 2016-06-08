@@ -13,8 +13,6 @@
   </ion-buttons>
 </ion-navbar>
 
-
-
 <ion-content padding class="house-detail">
 
   <ion-slides [options]="swiperOptions" class="swiper-container">
@@ -44,11 +42,9 @@
       
 
      <button full outline (click)="share('Hello World', 'Attention', null, 'https://www.thepolyglotdeveloper.com')">Share</button>
-   
 
     </div>
-
-   
+  
     <div *ngSwitchWhen="'school'">
       <p>{{house.school}}</p>
     </div>
@@ -58,100 +54,83 @@
     </div>
   </div>
  <div class="fyxqupright_cont ui-body ui-body-a">
-                <div class="fyxq_ptss">
-                    <div class="fyxq_ptssleft">价格：</div>
-                    <div class="fyxq_ptssright">{{priceTxt}}<div *ngIf="exchangeRate is not null"> &nbsp;
-                      <span>(约<i>{{number_format(house.lp_dol * floatval(exchangeRate)/10000, 0)}}</i>万人民币）</span></div>
-                   </div>
-                    <div class="cl"></div>
-                </div>
-                <div class="fyxq_ptss">
-                    <div class="fyxq_ptssleft">地址：</div>
-                    <div class="fyxq_ptssright">{{house.addr}}&nbsp{{house.municipality}}</div>
-                    <div class="cl"></div>
-                </div>
-                <div class="fyxq_ptss">
-                    <div class="fyxq_ptssleft">{{(house.investType_id == 1)??'学区'||'城市'}}</div>
-                    <div class="fyxq_ptssright">{{house.mname.municipality_cname}}&nbsp&nbsp{{house.city.name}}</div>
-                    <div class="cl"></div>
-                </div>
-                <div class="fyxq_ptss">
-                    <div class="fyxq_ptssleft">户型：</div>
-                    <div class="fyxq_ptssright"><img src="new/images/1s.jpg"  />&nbsp;&nbsp;{{house.br}}&nbsp;&nbsp;<img src="new/images/1t.jpg" />&nbsp;&nbsp;{{house.bath_tot}}</div>
-                    <div class="cl"></div>
-                </div>
-                <div class="fyxq_ptss">
-                    <div class="fyxq_ptssleft">配套：</div>
-                    <div class="fyxq_ptssright fyxq_ptpd">
-                    
-                               <div [ngSwitch]="if(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false)">
-                                <!--有 -->            
-                                <span *ngSwitchWhen=true> 
-                                <b></b><font color="#FF3300">空调</font></span>
-                                <!--无 -->
-                               <span *ngSwitchWhen=false><s></s>空调</span>
-                               </div>
-                    
-                               <div [ngSwitch]="house.central_vac=='Y'">
-                                <!--有 -->            
-                                <span *ngSwitchWhen=true><b></b><font color="#FF3300">吸尘</font></span>
-                                <!--无 -->
-                               <span *ngSwtichWhen=false><s></s>吸尘</span>
-                               </div>
+	<div class="fyxq_ptss">
+		<div class="fyxq_ptssleft">价格：</div>
+		<div class="fyxq_ptssright">{{priceTxt}}<div *ngIf="exchangeRate is not null"> &nbsp;
+			<span>(约<i>{{number_format(house.lp_dol * floatval(exchangeRate)/10000, 0)}}</i>万人民币）</span></div>
+		</div>
+		<div class="cl"></div>
+	</div>
+	<div class="fyxq_ptss">
+		<div class="fyxq_ptssleft">地址：</div>
+		<div class="fyxq_ptssright">{{house.addr}}&nbsp{{house.municipality}}</div>
+		<div class="cl"></div>
+	</div>
+	<div class="fyxq_ptss">
+		<div class="fyxq_ptssleft">{{(house.investType_id == 1)?"学区"|"城市"}}</div>
+		<div class="fyxq_ptssright">{{house.mname.municipality_cname}}&nbsp&nbsp{{house.city.name}}</div>
+		<div class="cl"></div>
+	</div>
+	<div class="fyxq_ptss">
+		<div class="fyxq_ptssleft">户型：</div>
+		<div class="fyxq_ptssright"><img src="new/images/1s.jpg"  />&nbsp;&nbsp;{{house.br}}&nbsp;&nbsp;<img src="new/images/1t.jpg" />&nbsp;&nbsp;{{house.bath_tot}}</div>
+		<div class="cl"></div>
+	</div>
+	<div class="fyxq_ptss">
+		<div class="fyxq_ptssleft">配套：</div>
+		<div class="fyxq_ptssright fyxq_ptpd">
+			<div [ngSwitch]="(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false)">
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">空调</font></span>
+				<!--无 --><span *ngSwitchDefault><s></s>空调</span>
+			</div>
+	
+			<div [ngSwitch]="house.central_vac=='Y'">
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">吸尘</font></span>
+				<!--无 --><span *ngSwtichDefault><s></s>吸尘</span>
+			</div>
 
-                               <div [ngSwitch]="house.furnished==1">
-                                <!--有 -->            
-                                <span *ngSwitchWhen=true><b></b><font color="#FF3300">家具</font></span>
-                                <!--无 -->
-                               <span *ngSwitchWhen=false><s></s>家具</span>
-                               </div>
+			<div [ngSwitch]="house.furnished==1">
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">家具</font></span>
+				<!--无 --><span *ngSwitchDefault><s></s>家具</span>
+			</div>
 
-                               <div [ngSwitch]="house.elevator=='Y'")>
-                                <!--有 -->            
-                                <span *ngSwitchWhen=true><b></b><font color="#FF3300">电梯</font></span>
-                                <!--无 -->
-                               <span *ngSwitchWhen=false><s></s>电梯</span>
-                               </div>
-                               
-                               <div [ngSwtich]="house.bsmt1_out !='None' or house.bsmt2_out !=''")>
-                                <!--有 -->            
-                                <span *ngSwitchWhen=true><b></b><font color="#FF3300">地下室</font></span>
-                                <!--无 -->
-                               <span *ngSwitchWhen=false><s></s>地下室</span>
-                               </div>
+			<div [ngSwitch]="house.elevator=='Y'")>
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">电梯</font></span>
+				<!--无 --><span *ngSwitchDefault><s></s>电梯</span>
+			</div>
+				
+			<div [ngSwtich]="house.bsmt1_out !='None' or house.bsmt2_out !=''")>
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">地下室</font></span>
+				<!--无 --><span *ngSwitchWhenDefault><s></s>地下室</span>
+			</div>
 
-                               <div [ngSwitch]="(strpos($house->pool, 'pool') !== false)>
-								               <!--有 --> 
-                               <span *ngSwitchWhen=true><b></b><font color="#FF3300">泳池</font></span><?php 
-								               <!--无 -->
-                               <span *ngSwitchWhen=false><s></s>泳池</span> 
-                               
-                               <div [ngSwtich]="house.fpl_num == 'Y'">
-                                <!--有 -->            
-                                <span *ngSwitchWhen=true><b></b><font color="#FF3300">壁炉</font></span>
-                                <!--无 -->
-                               <span *ngSwitchWhen=false><s></s>壁炉</span>
-                               </div> 
-                        </div>
-                    <div class="cl"></div>
-                </div>
-                
-                <div class="fyxq_rx">服务热线：
-                  <img src="new/images/plat.jpg" width="23" height="15" /><a href="tel:400-9900-393"><span>400-870-1029</span></a>
-                </div>
-                 <div class="cl"></div>
-                </div>
+			<div [ngSwitch]="(strpos($house->pool, 'pool') !== false)">
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">泳池</font></span> 
+				<!--无 --><span *ngSwitchWhenDefault><s></s>泳池</span> 
+			</div> 
+			
+			<div [ngSwtich]="house.fpl_num == 'Y'">
+				<!--有 --><span *ngSwitchWhen=true><b></b><font color="#FF3300">壁炉</font></span>
+				<!--无 --><span *ngSwitchWhenDefault><s></s>壁炉</span>
+			</div>
+			<div class="cl"></div>
+		</div>
+	
+		<div class="fyxq_rx">服务热线：
+			<img src="new/images/plat.jpg" width="23" height="15" /><a href="tel:400-9900-393"><span>400-870-1029</span></a>
+		</div>
+		<div class="cl"></div>
+	</div>
 <!--End-->
 
 <!--START-->			
 <div class="fyxqdown_left_cont ui-bar">
 
-	<ul class="xqlb_list" data-role="listview" >
+	<ion-list class="xqlb_list" data-role="listview" >
 		<li id="housedivider" data-role="list-divider">
 			<span>详情列表</span>
 			<span class="dlh_btn">
-              
-				<select id="yc2m" data-role="flipswitch" data-mini="true">
+ 				<select id="yc2m" data-role="flipswitch" data-mini="true">
 				  <option value="feet">英尺</option>
 				  <option value="meter">米</option>
 				</select>
@@ -185,144 +164,33 @@
 
 			<li id="housedivider" data-role="list-divider">房屋布局</li>
 		<li>
-
 		<div id="fwbj" class="fwbjtable table-stroke">            
-		<!-- <table data-role="table" id="fwbj" class="ui-responsive" data-mode="columntoggle"> -->
 		<table  class="ui-responsive">
 		<thead><tr>
-		<th width="12%" data-priority="1" style="border-bottom: 1px solid #CCCCCC;">楼层</th>
-		<th width="12%" data-priority="2" style="border-bottom: 1px solid #CCCCCC;">房间</th>
-		<th width="20%" data-priority="3" style="border-bottom: 1px solid #CCCCCC;">长(M)</th>
-		<th width="20%" data-priority="4" style="border-bottom: 1px solid #CCCCCC;">宽(M)</th>
-		<th width="17%" data-priority="5" style="border-bottom: 1px solid #CCCCCC;">面积(M2)</th>
-		<th width="21%" data-priority="6" style="border-bottom: 1px solid #CCCCCC;">说明</th>
+			<th width="12%" data-priority="1" style="border-bottom: 1px solid #CCCCCC;">楼层</th>
+			<th width="12%" data-priority="2" style="border-bottom: 1px solid #CCCCCC;">房间</th>
+			<th width="20%" data-priority="3" style="border-bottom: 1px solid #CCCCCC;">长(M)</th>
+			<th width="20%" data-priority="4" style="border-bottom: 1px solid #CCCCCC;">宽(M)</th>
+			<th width="17%" data-priority="5" style="border-bottom: 1px solid #CCCCCC;">面积(M2)</th>
+			<th width="21%" data-priority="6" style="border-bottom: 1px solid #CCCCCC;">说明</th>
 		</tr></thead>
 		<tbody>
-		<tr *ngIf="house.level1!='' || house.rm1_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level1}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm1_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm1_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm1_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm1_len*house.rm1_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm1_dc1_out,house.rm1_dc2_out,house.rm1_dc3_out)}}</td>
+		<tr *ngFor="let room of rooms">
+			<div *ngIf="room.level!='' || room.out!=''">
+				<td style="border-bottom: 1px solid #CCCCCC;">{{room.level}}</td>
+				<td style="border-bottom: 1px solid #CCCCCC;">{{room.out}}</td>
+				<td style="border-bottom: 1px solid #CCCCCC;">{{room.len}}</td>
+				<td style="border-bottom: 1px solid #CCCCCC;">{{room.wth}}</td>
+				<td style="border-bottom: 1px solid #CCCCCC;">{{room.area}}</td>
+				<td style="border-bottom: 1px solid #CCCCCC;">{{room.desc}}</td>
+			</div>
 		</tr>
-		<tr *ngIf="house.level2!='' || house.rm2_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level2}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm2_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm2_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm2_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm2_len*house.rm2_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm2_dc1_out,house.rm2_dc2_out,house.rm2_dc3_out)}}</td>
-		</tr>
-		<tr *ngIf="house.level3!='' || house.rm3_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level3}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm3_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm3_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm3_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm3_len*house.rm3_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm3_dc1_out,house.rm3_dc2_out,house.rm3_dc3_out)}}</td>
-		</tr>
-		<tr *ngIf="house.level4!='' || house.rm4_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level4}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm4_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm4_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm4_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm4_len*house.rm4_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm4_dc1_out,house.rm4_dc2_out,house.rm4_dc3_out)}}</td>
-		</tr>
-    <tr *ngIf="house.level5!='' || house.rm5_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level5}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm5_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm5_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm5_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm5_len*house.rm5_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm5_dc1_out,house.rm5_dc2_out,house.rm5_dc3_out)}}</td>
-		</tr>
-		<tr *ngIf="house.level6!='' || house.rm6_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level6}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm6_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm6_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm6_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm6_len*house.rm6_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm6_dc1_out,house.rm6_dc2_out,house.rm6_dc3_out)}}</td>
-		</tr>
-		<tr *ngIf="house.level7!='' || house.rm7_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level7}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm7_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm7_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm7_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm7_len*house.rm7_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm7_dc1_out,house.rm7_dc2_out,house.rm7_dc3_out)}}</td>
-		</tr>
-		<tr *ngIf="house.level8!='' || house.rm8_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level8}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm8_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm8_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm8_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm8_len*house.rm8_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm8_dc1_out,house.rm8_dc2_out,house.rm8_dc3_out)}}</td>
-		</tr>
-		<tr *ngIf="house.level9!='' || house.rm9_out!=''">
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house.level9}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm9_out}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm9_len}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{house->rm9_wth}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{round(house.rm9_len*house.rm9_wth,1)}}</td>
-		<td style="border-bottom: 1px solid #CCCCCC;">{{getRoomDesc(house.rm9_dc1_out,house.rm9_dc2_out,house.rm9_dc3_out)}}</td>
-		</tr>
-		<?php if($house->level9!="" || $house->rm9_out!=""){?>
-		<tr>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->level9;?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_out; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_len; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_wth; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm9_len*$house->rm9_wth,1); ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_dc1_out; ?><?php if($house->rm9_dc2_out!=""){echo ",";}?><?php echo $house->rm9_dc2_out; ?><?php if($house->rm9_dc3_out!=""){echo ",";}?><?php echo $house->rm9_dc3_out; ?></td>
-		</tr>
-		<?php }?>
-		<?php if($house->level10!="" || $house->rm10_out!=""){?>
-		<tr>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->level10;?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_out; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_len; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_wth; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm10_len*$house->rm10_wth,1); ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_dc1_out; ?><?php if($house->rm10_dc2_out!=""){echo ",";}?><?php echo $house->rm10_dc2_out; ?><?php if($house->rm10_dc3_out!=""){echo ",";}?><?php echo $house->rm10_dc3_out; ?></td>
-		</tr>
-		<?php }?>
-
-		<?php if($house->level11!=""){?>
-		<tr>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->level11;?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_out; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_len; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_wth; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm11_len*$house->rm11_wth,1); ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_dc1_out; ?><?php if($house->rm11_dc2_out!=""){echo ",";}?><?php echo $house->rm11_dc2_out; ?><?php if($house->rm11_dc3_out!=""){echo ",";}?><?php echo $house->rm11_dc3_out; ?></td>
-		</tr>
-		<?php }?>
-
-
-		<?php if($house->level12!=""){?>
-		<tr>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->level12;?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_out; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_wth; ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm12_len*$house->rm12_wth,1); ?></td>
-		<td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_dc1_out; ?><?php if($house->rm12_dc2_out!=""){echo ",";}?><?php echo $house->rm12_dc2_out; ?><?php if($house->rm12_dc3_out!=""){echo ",";}?><?php echo $house->rm12_dc3_out; ?></td>
-		</tr>
-		<?php }?>
 		</tbody></table>
 		</div>
 	</li>
-			<li id="housedivider" data-role="list-divider">房屋描述</li>
-                <div class="fwms_cont">
-                     <?php echo $house->ad_text; ?><BR/><B>Extras:</B><BR/><?php echo $house->extras; ?>
-                                  </div>
-	</ul>
-
-	
+		<li id="housedivider" data-role="list-divider">房屋描述</li>
+			<div class="fwms_cont">{{house.ad_text}}<BR/><B>Extras:</B><BR/>{{house.extras}}</div>
+	</ion-list>
 </div>
 <!--End-->
  

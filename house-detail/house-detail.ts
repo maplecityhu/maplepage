@@ -19,6 +19,7 @@ export class HouseDetailPage implements OnInit {
   private parms: Object;
   private section: string = "summary";
   private isAndroid: boolean = false;
+	private rooms: Object;
   private house = {
 			id: '',  // => 'ID',
 			name: '', // => '名称',
@@ -237,7 +238,8 @@ export class HouseDetailPage implements OnInit {
 
   getResult(url) {
     this.mapleRestData.load(url, this.parms).subscribe(
-      data => { this.house = data; console.log(this.house)}
+      data => { this.house = data; console.log(this.house);
+				this.setRooms(this.house); console.log(this.rooms);}
     )
   }
   
@@ -250,6 +252,21 @@ export class HouseDetailPage implements OnInit {
     return img.replace('uploads', this.project.replaceurl);
   }
   
+	setRooms(h) {
+		this.rooms[0] = {level:h.level1, out:h.rm1_out, len:h.rm1_len, wth:h.rm1_wth, area:round(h.rm1_len*h.rm1_wth,1), desc:this.getRoomDesc(h.rm1_dc1_out,h.rm1_dc2_out,h.rm1_dc3_out)};
+		this.rooms[1] = {level:h.level2, out:h.rm2_out, len:h.rm2_len, wth:h.rm2_wth, area:round(h.rm2_len*h.rm2_wth,1), desc:this.getRoomDesc(h.rm2_dc1_out,h.rm2_dc2_out,h.rm2_dc3_out)};
+		this.rooms[2] = {level:h.level3, out:h.rm3_out, len:h.rm3_len, wth:h.rm3_wth, area:round(h.rm3_len*h.rm3_wth,1), desc:this.getRoomDesc(h.rm3_dc1_out,h.rm3_dc2_out,h.rm3_dc3_out)};
+		this.rooms[3] = {level:h.level4, out:h.rm4_out, len:h.rm4_len, wth:h.rm4_wth, area:round(h.rm4_len*h.rm4_wth,1), desc:this.getRoomDesc(h.rm4_dc1_out,h.rm4_dc2_out,h.rm4_dc3_out)};
+		this.rooms[4] = {level:h.level5, out:h.rm5_out, len:h.rm5_len, wth:h.rm5_wth, area:round(h.rm5_len*h.rm5_wth,1), desc:this.getRoomDesc(h.rm5_dc1_out,h.rm5_dc2_out,h.rm5_dc3_out)};
+		this.rooms[5] = {level:h.level6, out:h.rm6_out, len:h.rm6_len, wth:h.rm6_wth, area:round(h.rm6_len*h.rm6_wth,1), desc:this.getRoomDesc(h.rm6_dc1_out,h.rm6_dc2_out,h.rm6_dc3_out)};
+		this.rooms[6] = {level:h.level7, out:h.rm7_out, len:h.rm7_len, wth:h.rm7_wth, area:round(h.rm7_len*h.rm7_wth,1), desc:this.getRoomDesc(h.rm7_dc1_out,h.rm7_dc2_out,h.rm7_dc3_out)};
+		this.rooms[7] = {level:h.level8, out:h.rm8_out, len:h.rm8_len, wth:h.rm8_wth, area:round(h.rm8_len*h.rm8_wth,1), desc:this.getRoomDesc(h.rm8_dc1_out,h.rm8_dc2_out,h.rm8_dc3_out)};
+		this.rooms[8] = {level:h.level9, out:h.rm9_out, len:h.rm9_len, wth:h.rm9_wth, area:round(h.rm9_len*h.rm9_wth,1), desc:this.getRoomDesc(h.rm9_dc1_out,h.rm9_dc2_out,h.rm9_dc3_out)};
+		this.rooms[9] = {level:h.level10, out:h.rm10_out, len:h.rm10_len, wth:h.rm10_wth, area:round(h.rm10_len*h.rm10_wth,1), desc:this.getRoomDesc(h.rm10_dc1_out,h.rm10_dc2_out,h.rm10_dc3_out)};
+		this.rooms[10] = {level:h.level11, out:h.rm11_out, len:h.rm11_len, wth:h.rm11_wth, area:round(h.rm11_len*h.rm11_wth,1), desc:this.getRoomDesc(h.rm11_dc1_out,h.rm11_dc2_out,h.rm11_dc3_out)};
+		this.rooms[11] = {level:h.level12, out:h.rm12_out, len:h.rm12_len, wth:h.rm12_wth, area:round(h.rm12_len*h.rm12_wth,1), desc:this.getRoomDesc(h.rm12_dc1_out,h.rm12_dc2_out,h.rm12_dc3_out)};
+	}
+
   getPriceTxt() {
     let priceTxt;
     
@@ -276,7 +293,7 @@ export class HouseDetailPage implements OnInit {
         propertyTxt = propertyTxt + " , " + this.house.prop_feat6_out;
       
       return propertyTxt;
-   }
+  }
 
   getRoomDesc(dc1, dc2, dc3) {
       let roomDesc = dc1;
